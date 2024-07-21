@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(name = "tbl_matricula")
+@Table(name = "matricula")
 public class Matricula {
 
     @Id
@@ -20,6 +20,24 @@ public class Matricula {
 
     @Column(name = "valor")
     private Double valor;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "id_curso_fk",
+            foreignKey = @ForeignKey(name = "fk_curso_matricula"),
+            referencedColumnName = "id",
+            nullable = false
+    )
+    private Curso curso;
+
+    @OneToOne
+    @JoinColumn(
+            name = "id_aluno_fk",
+            foreignKey = @ForeignKey(name = "fk_aluno_matricula"),
+            referencedColumnName = "id",
+            nullable = false
+    )
+    private Aluno aluno;
 
     public Long getId() {
         return id;
@@ -51,5 +69,21 @@ public class Matricula {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 }

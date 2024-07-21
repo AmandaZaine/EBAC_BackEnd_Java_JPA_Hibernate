@@ -1,25 +1,25 @@
 package domain;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "curso")
-public class Curso {
+@Table(name = "aluno")
+public class Aluno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "curso_seq")
-    @SequenceGenerator(name = "curso_seq", sequenceName = "seq_curso", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "aluno_seq")
+    @SequenceGenerator(name = "aluno_seq", sequenceName = "seq_aluno", initialValue = 1, allocationSize = 1)
     private Long id;
 
     @Column(name = "codigo", length = 10, nullable = false, unique = true)
     private String codigo;
 
-    @Column(name = "nome", length = 100, nullable = false)
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "curso")
-    private List<Matricula> matriculas;
+    @Column(name = "matricula", nullable = false)
+    @OneToOne(mappedBy = "aluno")
+    private Matricula matricula;
 
     public Long getId() {
         return id;
@@ -45,11 +45,12 @@ public class Curso {
         this.nome = nome;
     }
 
-    public List<Matricula> getMatriculas() {
-        return matriculas;
+    public Matricula getMatricula() {
+        return matricula;
     }
 
-    public void setMatriculas(List<Matricula> matriculas) {
-        this.matriculas = matriculas;
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
     }
 }
+

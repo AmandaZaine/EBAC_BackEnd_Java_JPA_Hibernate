@@ -1,8 +1,11 @@
 package domain;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "tbl_produto")
-public class Produto implements Persistente {
+public class Produto extends Persistence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produto_seq")
